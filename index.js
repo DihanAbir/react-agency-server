@@ -58,6 +58,7 @@ client.connect(err => {
       // console.log("order:",order)
   })
 
+  // email wise order  
   app.get("/order", (req, res) => {
     agencyCollection.find({email: req.query.email})
     .toArray((err, documents) => {
@@ -67,14 +68,26 @@ client.connect(err => {
 
   })  
 
-  console.log(" order db successful");
+  // all order 
+
+  app.get("/all-order", (req, res) => {
+    agencyCollection.find({})
+    .toArray((err, documents) => {
+      res.send(documents)
+    }
+    )
+
+  })  
+
 });
 
+console.log(" order db successful");
 
 
 
 app.get('/', function (req, res) {
-    res.send('hello world')
+    res.send('hello from heroku server')
   })
   
+  // app.listen(5000)
   app.listen(process.env.PORT || 5000)
